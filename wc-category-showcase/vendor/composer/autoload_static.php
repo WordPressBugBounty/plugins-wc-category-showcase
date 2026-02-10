@@ -4,16 +4,21 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit1f0d78c5649559c925c92495719b0021
+class ComposerStaticInitf8c740e3595fadbbfec33d998d5db742
 {
     public static $prefixLengthsPsr4 = array (
         'W' =>
         array (
+            'WooCommerceCategoryShowcase\\ByteKit\\' => 36,
             'WooCommerceCategoryShowcase\\' => 28,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'WooCommerceCategoryShowcase\\ByteKit\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/byteever/bytekit-plugin/src',
+        ),
         'WooCommerceCategoryShowcase\\' =>
         array (
             0 => __DIR__ . '/../..' . '/includes',
@@ -22,25 +27,14 @@ class ComposerStaticInit1f0d78c5649559c925c92495719b0021
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'WooCommerceCategoryShowcase\\Admin\\Admin' => __DIR__ . '/../..' . '/includes/Admin/Admin.php',
-        'WooCommerceCategoryShowcase\\Admin\\Menus' => __DIR__ . '/../..' . '/includes/Admin/Menus.php',
-        'WooCommerceCategoryShowcase\\Admin\\Notices' => __DIR__ . '/../..' . '/includes/Admin/Notices.php',
-        'WooCommerceCategoryShowcase\\Admin\\Utilities' => __DIR__ . '/../..' . '/includes/Admin/Utilities.php',
-        'WooCommerceCategoryShowcase\\Admin\\listTables\\AbstractListTable' => __DIR__ . '/../..' . '/includes/Admin/listTables/AbstractListTable.php',
-        'WooCommerceCategoryShowcase\\Admin\\listTables\\ShowcaseListTable' => __DIR__ . '/../..' . '/includes/Admin/listTables/ShowcaseListTable.php',
-        'WooCommerceCategoryShowcase\\Controllers\\Helpers' => __DIR__ . '/../..' . '/includes/Controllers/Helpers.php',
-        'WooCommerceCategoryShowcase\\Installer' => __DIR__ . '/../..' . '/includes/Installer.php',
-        'WooCommerceCategoryShowcase\\Plugin' => __DIR__ . '/../..' . '/includes/Plugin.php',
-        'WooCommerceCategoryShowcase\\PostTypes' => __DIR__ . '/../..' . '/includes/PostTypes.php',
-        'WooCommerceCategoryShowcase\\Shortcodes\\Shortcodes' => __DIR__ . '/../..' . '/includes/Shortcodes/Shortcodes.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit1f0d78c5649559c925c92495719b0021::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit1f0d78c5649559c925c92495719b0021::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit1f0d78c5649559c925c92495719b0021::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitf8c740e3595fadbbfec33d998d5db742::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitf8c740e3595fadbbfec33d998d5db742::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitf8c740e3595fadbbfec33d998d5db742::$classMap;
 
         }, null, ClassLoader::class);
     }
