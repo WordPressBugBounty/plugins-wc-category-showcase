@@ -3,7 +3,7 @@
  * Plugin Name:          Category Showcase
  * Plugin URI:           https://pluginever.com/plugins/woocommerce-category-showcase-pro/
  * Description:          WooCommerce extension to showcase categories in various styles and layouts like sliders, blocks, and grids.
- * Version:              2.3.2
+ * Version:              2.4.0
  * Requires at least:    5.2
  * Requires PHP:         7.4
  * Author:               PluginEver
@@ -13,8 +13,8 @@
  * Text Domain:          wc-category-showcase
  * Domain Path:          /languages
  * Tested up to:         7.0
- * WC requires at least: 3.0.0
- * WC tested up to:      10.7
+ * WC requires at least: 6.0.0
+ * WC tested up to:      10.9
  * Requires Plugins:     woocommerce
  *
  * @link https://pluginever.com/plugins/woocommerce-category-showcase-pro/
@@ -35,18 +35,41 @@
  * @author    Sultan Nasir Uddin <manikdrmc@gmail.com>
  * @copyright 2026 ByteEver
  * @license   GPL-2.0+
- * @package   WooCommerceCategoryShowcase
+ * @package   PluginEver\CategoryShowcase
  */
+
+use PluginEver\CategoryShowcase\Installer;
+use PluginEver\CategoryShowcase\Plugin;
 
 defined( 'ABSPATH' ) || exit;
 
-// Autoloader.
 require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/includes/functions.php';
 
-// Instantiate the plugin.
-WooCommerceCategoryShowcase\Plugin::create(
-	array(
-		'file'         => __FILE__,
-		'settings_url' => admin_url( 'admin.php?page=wc-category-showcase' ),
-	)
+$data = array(
+	'version'      => '2.4.0',
+	'name'         => 'Category Showcase',
+	'settings_url' => admin_url( 'admin.php?page=wc-category-showcase' ),
+	'support_url'  => 'https://pluginever.com/support/',
+	'docs_url'     => 'https://pluginever.com/docs/wc-category-showcase/',
+	'review_url'   => 'https://wordpress.org/support/plugin/wc-category-showcase/reviews/#new-post',
+	'pro_basename' => 'woocommerce-category-showcase-pro/wc-category-showcase-pro.php',
+	'upgrade_url'  => 'https://pluginever.com/plugins/woocommerce-category-showcase-pro/',
 );
+
+Plugin::create( __FILE__, $data );
+
+wc_category_showcase()->on_activation( array( Installer::class, 'install' ) );
+wc_category_showcase()->on_deactivation( array( Installer::class, 'deactivate' ) );
+
+add_action(
+	'before_woocommerce_init',
+	function () {
+		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', __FILE__, true );
+		}
+	}
+);
+
+wc_category_showcase()->bootstrap();
